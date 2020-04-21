@@ -8,7 +8,7 @@
 
 <h2>Features.</h2>
 <p><b>1. Uses JobScheduler on devices with API 23+.</b></p>
-<p><b>2. Uses Combination of BroadCast Receiver + AlarmManager on device with API 14 -22.</b></p>
+<p><b>2. Uses Combination of BroadCastReceiver + AlarmManager on device with API 14 -22.</b></p>
 <p><b>3. You can define constraints like NetworkAvailability, charging status , deviceIDLE state or  storageNotLow etc. </b></p>
 <p><b>4. Can Schedule one-off(one time) or periodic tasks. </b></p>
 <p><b>5. Can Chain multiple tasks together example task a , b, c combine result will get to d task. </b></p>
@@ -31,9 +31,7 @@ dependencies {
 
 </code></pre>
 <p><b> Add worker class and override do work method and put your work inside this overrided method. </b></p>
-<code><pre>
-
-class MyWorker(context: Context , workParams : WorkerParameters) : Worker(context,workParams){
+<code><pre>class MyWorker(context: Context , workParams : WorkerParameters) : Worker(context,workParams){
     override fun doWork(): Result {
 
         Log.i("MyWorker",".....worker thread running.....")
@@ -56,7 +54,7 @@ class MyWorker(context: Context , workParams : WorkerParameters) : Worker(contex
 
     // Use either of two
 
-    //Use for periodic taks
+    //Use for periodic taks ( minimum time i 15 minutes)
         val periodicWork = PeriodicWorkRequestBuilder<MyWorker>(16,TimeUnit.MINUTES)
             .setConstraints(constaints).build()
     // use for one time tasks
