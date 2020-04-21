@@ -25,7 +25,7 @@
 <p><b>2. After step 1 it go to RUNNING state.  </b></p>
 <p><b>3. IF worker return success then we will mark it with SUCCESS and same with FAILURE, CANNCELLED and RETRY.  </b></p>
 
-<h2> State of Periodic Work <h2>
+<h2> State of Periodic Work </h2>
 <p><b>1. It have only one state  ENQUEUE no BLOCKED state.  </b></p>
 <p><b>2. One constraints are met it will go to RUNNING state.  </b></p>
 <p><b>3. After step 2 , whether you mark it SUCCESS or RETRY you go to ENQUEUE state  </b></p>
