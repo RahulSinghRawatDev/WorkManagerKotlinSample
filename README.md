@@ -20,9 +20,8 @@
 <p><b>2. Periodic syncing local data with the network.</b></p>
 <p><b>3. Apply filter to image and saving the image.</b></p>
 
-
 <h2>Steps to add workManager to your app </h2>
-<p><b>Add dependency in your app gradle file. Add ktx if using kotlin only.</b></p>
+<p><b>1. Add dependency in your app gradle file. Add ktx if using kotlin only.</b></p>
 <code><pre>
 
 dependencies {
@@ -30,7 +29,7 @@ dependencies {
 }
 
 </code></pre>
-<p><b> Add worker class and override do work method and put your work inside this overrided method. </b></p>
+<p><b>2. Add worker class and override do work method and put your work inside this overrided method. </b></p>
 <code><pre>class MyWorker(context: Context , workParams : WorkerParameters) : Worker(context,workParams){
     override fun doWork(): Result {
 
@@ -42,32 +41,22 @@ dependencies {
 
 </code></pre>
 
-<p><b> Add WorkRequest either onetime of periodic with optional constaints like Network availability or Network enable </b></p>
+<p><b>3. Add WorkRequest either onetime of periodic with optional constaints like Network availability or Network enable </b></p>
 
-<code><pre>
-       // constaints that i want to run this thing only when device is in charging mode and Network type is connected
+<code><pre>// constaints that i want to run this thing only when device is in charging mode and Network type is connected
        val constaints : Constraints = Constraints.Builder()
             .setRequiresCharging(true)
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
-
-
     // Use either of two
-
     //Use for periodic taks ( minimum time i 15 minutes)
         val periodicWork = PeriodicWorkRequestBuilder<MyWorker>(16,TimeUnit.MINUTES)
-            .setConstraints(constaints).build()
+          .setConstraints(constaints).build()
     // use for one time tasks
-        val oneTimeWork = OneTimeWorkRequestBuilder<MyWorker>()
+          val oneTimeWork = OneTimeWorkRequestBuilder<MyWorker>()
             .setConstraints(constaints).build()
-
-
 </code></pre>
 
-<p><b> Schedule the workReuest with WorkManager instance </p></b>
-<code><pre>
-
-   WorkManager.getInstance().enqueue(< workReuest instance >)
-
-</code></pre>
+<p><b>4. Schedule the workReuest with WorkManager instance </p></b>
+<code><pre>   WorkManager.getInstance().enqueue(< workReuest instance >)</code></pre>
 
