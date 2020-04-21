@@ -91,7 +91,7 @@ It Schedules to do work on background thread.
 
 <p><b>4. Schedule the workReuest with WorkManager instance </p></b>
 <code><pre>   WorkManager.getInstance().enqueue(< workReuest instance >)</code></pre>
-<code><pre>   You can also use UNIQUEWORK which is conflict policy that can be used inspite of enqueue if you want only one instance of that work even after restarting the application</code></pre>
+<p><b>   You can also use UNIQUEWORK which is conflict policy that can be used inspite of enqueue if you want only one instance of that work even after restarting the application</b></p>
 <code><pre>   WorkManager.getInstance().enqueueUniqueWork(< workReuest instance >)</code></pre>
 
 
