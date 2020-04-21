@@ -41,7 +41,7 @@ dependencies {
 
 </code></pre>
 
-<p><b>3. Add WorkRequest either onetime of periodic with optional constaints like Network availability or Network enable </b></p>
+<p><b>3. Add WorkRequest either onetime or periodic with optional constaints like Network availability or Network enable </b></p>
 
 <code><pre>// constaints that i want to run this thing only when device is in charging mode and Network type is connected
        val constaints : Constraints = Constraints.Builder()
