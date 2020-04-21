@@ -30,6 +30,8 @@ dependencies {
 
 </code></pre>
 <p><b>2. Add worker class and override do work method and put your work inside this overrided method. </b></p>
+<p><b> Extend Worker class if you want synchronous tasks do work works in specified background thread and Use ListenableWorker class if you want asynchronous tasks for that use startWork in main thread and do work in your own custom threads.  </b></p>
+
 <code><pre>class MyWorker(context: Context , workParams : WorkerParameters) : Worker(context,workParams){
     override fun doWork(): Result {
 
@@ -38,6 +40,9 @@ dependencies {
         return Result.retry()
     }
 }
+
+Here do work returns a Result which can be SUCCESS , FAILURE and RETRY
+It Schedules to do work on background thread.
 
 </code></pre>
 
