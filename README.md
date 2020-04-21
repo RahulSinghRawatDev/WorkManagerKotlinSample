@@ -20,6 +20,20 @@
 <p><b>2. Periodic syncing local data with the network.</b></p>
 <p><b>3. Apply filter to image and saving the image.</b></p>
 
+<h2> State of OneTime Work <h2>
+<p><b>1. It have two states BLOCKED or ENQUEUE.  </b></p>
+<p><b>2. After step 1 it go to RUNNING state.  </b></p>
+<p><b>3. IF worker return success then we will mark it with SUCCESS and same with FAILURE, CANNCELLED and RETRY.  </b></p>
+
+<h2> State of Periodic Work <h2>
+<p><b>1. It have only one state  ENQUEUE no BLOCKED state.  </b></p>
+<p><b>2. One constraints are met it will go to RUNNING state.  </b></p>
+<p><b>3. After step 2 , whether you mark it SUCCESS or RETRY you go to ENQUEUE state  </b></p>
+<p><b>4. After step 2 , if you mark it FAILURE then periodic work won't run again.</b></p>
+<p><b>5. Anytime your work will be in CANCEL state then periodic will not work again. </b></p>
+
+<p><b> * In chaining, If a unit of work fail then all child works also FAIL and If a unit of work cancel then all its child work also CANCELS. </b></p>
+
 <h2>Steps to add workManager to your app </h2>
 <p><b>1. Add dependency in your app gradle file. Add ktx if using kotlin only.</b></p>
 <code><pre>
@@ -40,6 +54,11 @@ dependencies {
         return Result.retry()
     }
 }
+
+class MyWorker(context: Context , workParams : WorkerParameters) : ListenableWorker(context,workParams){
+    override fun startWork(): ListenableFuture<Result> {
+        return FUTURE
+    }
 
 Here do work returns a Result which can be SUCCESS , FAILURE and RETRY
 It Schedules to do work on background thread.
